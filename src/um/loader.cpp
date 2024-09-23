@@ -4,13 +4,13 @@ HANDLE iqvw64e_device_handle = NULL;
 
 LONG WINAPI SomeCrashHandler(EXCEPTION_POINTERS* ExceptionInfo)
 {
-	// if (ExceptionInfo && ExceptionInfo->ExceptionRecord)
-	// 	std::cout << "[!!] Crash at addr 0x" << ExceptionInfo->ExceptionRecord->ExceptionAddress << L" by 0x" << std::hex << ExceptionInfo->ExceptionRecord->ExceptionCode << std::endl;
-	// else
-	// 	std::cout << L"[!!] Crash" << std::endl;
+	if (ExceptionInfo && ExceptionInfo->ExceptionRecord)
+		printf("[!] Crash at addr %p\n", ExceptionInfo->ExceptionRecord->ExceptionAddress);
+	else
+		printf("[!] Crash\n");
 
-	// if (iqvw64e_device_handle)
-	// 	intel_driver::Unload(iqvw64e_device_handle);
+	if (iqvw64e_device_handle)
+		intel_driver::Unload(iqvw64e_device_handle);
 
 	return EXCEPTION_EXECUTE_HANDLER;
 }
