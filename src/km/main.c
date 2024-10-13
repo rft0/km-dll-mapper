@@ -13,7 +13,7 @@ VOID UnloadDriver(PDRIVER_OBJECT DriverObject) {
 	IoDeleteDevice(DriverObject->DeviceObject);
 }
 
-NTSTATUS DriverEntry(PDRIVER_OBJECT DriverObject, PUNICODE_STRING RegistryPath) {
+NTSTATUS RealDriverEntry(PDRIVER_OBJECT DriverObject, PUNICODE_STRING RegistryPath) {
     UNREFERENCED_PARAMETER(RegistryPath);
 
     DriverObject->DriverUnload = UnloadDriver;
@@ -35,4 +35,15 @@ NTSTATUS DriverEntry(PDRIVER_OBJECT DriverObject, PUNICODE_STRING RegistryPath) 
     DriverObject->MajorFunction[IRP_MJ_DEVICE_CONTROL] = IoControlDispatch;
 
     return STATUS_SUCCESS;
+}
+
+NTSTATUS DriverEntry(PDRIVER_OBJECT DriverObject, PUNICODE_STRING RegistryPath) {
+    UNREFERENCED_PARAMETER(DriverObject);
+    UNREFERENCED_PARAMETER(RegistryPath);
+
+    UNICODE_STRING driverName;
+    RtlInitUnicodeString(&driverName, IO_DRIVER_NAME);
+
+    // needed for kdmapper properly working, unsafe as fuck
+    return IoCreateDriver(&driverName, &RealDriverEntry);
 }
