@@ -1,11 +1,12 @@
 # Kernel Mode DLL Manual Mapper (KMDMM)
 DLL Manual Mapper that uses windows kernel api methods to manipulate memory, change memory region rights etc\
-UM program uses IOCTL to communicate with KM driver. 
+This program doesn't create any threads instead it walk through remote process's IAT table and hooks a frequently\
+used function for shellcode execution.\
 
+`src/km` -> Kernelmode driver\
+`src/um` -> Usermode program\
+\
 ![Kernelmode DLL Manual Mapper](https://raw.githubusercontent.com/rft0/km-dll-mapper/refs/heads/main/img/cp1.gif)
-
-`src/km` -> Kernelmode driver \
-`src/um` -> Usermode program
 
 ## Build Requirements:
 * Python 3+
