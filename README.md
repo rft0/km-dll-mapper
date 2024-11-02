@@ -2,7 +2,7 @@
 DLL Manual Mapper that uses windows kernel api methods to manipulate memory, change memory region rights etc\
 UM program uses IOCTL to communicate with KM driver. 
 
-![Kernelmode DLL Manual Mapper](https://raw.githubusercontent.com/rft0/km-dll-mapper/refs/heads/main/img/ss0.png)
+![Kernelmode DLL Manual Mapper](https://raw.githubusercontent.com/rft0/km-dll-mapper/refs/heads/main/img/cp1.gif)
 
 `src/km` -> Kernelmode driver \
 `src/um` -> Usermode program
